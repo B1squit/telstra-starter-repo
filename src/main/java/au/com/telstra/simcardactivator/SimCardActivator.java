@@ -27,7 +27,7 @@ public class SimCardActivator {
     }
 
     // Sends post request to authentication microservice and returns success as String object
-    @PostMapping("/activate")
+    @PostMapping("/")
     public String activate(@RequestBody Record record, RestTemplate restTemplate) throws Exception {
 
         String success = restTemplate.postForObject(
