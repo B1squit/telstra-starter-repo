@@ -4,12 +4,14 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 // Wrapper class to break down incoming JSON file
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Record {
+public class SimCard {
 
     private String iccid;
     private String customerEmail;
 
-    public Record (String iccid, String customerEmail) {
+    public SimCard() {}
+
+    public SimCard (String iccid, String customerEmail) {
         this.iccid = iccid;
         this.customerEmail = customerEmail;
     }
@@ -28,6 +30,11 @@ public class Record {
 
     public String getCustomerEmail() {
         return this.customerEmail;
+    }
+
+    @Override
+    public String toString() {
+        return "iccid: " + iccid + ", customerEmail: " + customerEmail;
     }
 
  }
