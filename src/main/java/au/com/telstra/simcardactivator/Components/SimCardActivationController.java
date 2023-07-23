@@ -11,6 +11,7 @@ import org.springframework.web.client.RestTemplate;
 
 import au.com.telstra.simcardactivator.Foundation.Result;
 import au.com.telstra.simcardactivator.Foundation.SimCard;
+import au.com.telstra.simcardactivator.Repository.SimCardEntity;
 import au.com.telstra.simcardactivator.Repository.SimCardRepository;
 
 @RestController
@@ -33,17 +34,14 @@ public class SimCardActivationController {
         log.info(result.toString());
 
         simCard.setActivated(result.getSuccess());
-
-        log.info(simCard.toString());
-
-        simCardRepository.save(simCard);
+        simCardRepository.save(new SimCardEntity(simCard));
 
         return result;
     }
 
     @PostMapping("/getSimCard")
     public SimCard getSimCard(@RequestParam long simCardId) {
-        return simCardRepository.findById(simCardId);
+        return new SimCard(simCardRepository.findById(simCardId));
     }
 
 }
