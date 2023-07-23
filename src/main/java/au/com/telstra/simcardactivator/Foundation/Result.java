@@ -1,4 +1,4 @@
-package au.com.telstra.simcardactivator;
+package au.com.telstra.simcardactivator.Foundation;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
