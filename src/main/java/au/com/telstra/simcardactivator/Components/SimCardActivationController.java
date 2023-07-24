@@ -3,6 +3,7 @@ package au.com.telstra.simcardactivator.Components;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.web.client.RestTemplateBuilder;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -39,7 +40,7 @@ public class SimCardActivationController {
         return result;
     }
 
-    @PostMapping("/getSimCard")
+    @GetMapping("/getSimCard")
     public SimCard getSimCard(@RequestParam long simCardId) {
         return new SimCard(simCardRepository.findById(simCardId));
     }

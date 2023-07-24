@@ -13,6 +13,11 @@ public class SimCard {
 
     protected SimCard() {}
 
+    public SimCard (String iccid, String customerEmail) {
+        this.iccid = iccid;
+        this.customerEmail = customerEmail;
+    }
+
     public SimCard (String iccid, String customerEmail, boolean activated) {
         this.iccid = iccid;
         this.customerEmail = customerEmail;
@@ -54,4 +59,4 @@ public class SimCard {
         return "iccid: " + iccid + ", customerEmail: " + customerEmail + ", activated: " + activated;
     }
 
- }
+}
