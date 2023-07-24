@@ -6,7 +6,8 @@ import io.cucumber.java.en.*;
 import io.cucumber.spring.CucumberContextConfiguration;
 
 import static org.junit.Assert.assertEquals;
-import static org.mockito.Mockito.timeout;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootContextLoader;
@@ -20,20 +21,20 @@ import org.springframework.test.context.ContextConfiguration;
 public class SimCardActivatorStepDefinitions {
     @Autowired
     private TestRestTemplate restTemplate;
+    private String iccid;
     private SimCard simCard;
-    private SimCard tempSimCard;
     private SimCard retSimCard;
 
     @Given("the sim card iccid {string} is valid")
     public void set_valid_iccid (String iccid) {
         this.simCard = new SimCard(iccid, "");
-        tempSimCard = new SimCard(iccid, "", true);
+        this.iccid = iccid;
     }
 
     @Given("the sim card iccid {string} is not valid")
     public void set_invalid_iccid (String iccid) {
         this.simCard = new SimCard(iccid, "");
-        tempSimCard = new SimCard(iccid, "", false);
+        this.iccid = iccid;
     }
 
     @And("that it is activated through {string}")
@@ -52,12 +53,14 @@ public class SimCardActivatorStepDefinitions {
 
     @Then("the sim card should be activated")
     public void check_activated() {
-        assertEquals(tempSimCard, retSimCard);
+        assertEquals(iccid, retSimCard.getIccid());
+        assertTrue(retSimCard.getActivated());
     }
 
     @Then("the sim card should not be activated")
     public void check_not_activated() {
-        assertEquals(tempSimCard, retSimCard);
+        assertEquals(iccid, retSimCard.getIccid());
+        assertFalse(retSimCard.getActivated());
     }
 
 }
