@@ -32,12 +32,16 @@ public class SimCardActivationController {
     public Result activate(@RequestBody SimCard simCard) {
 
         Result result = restTemplate.postForObject("http://localhost:8444/actuate", simCard, Result.class);
-        log.info(result.toString());
-
-        simCard.setActivated(result.getSuccess());
-        simCardRepository.save(new SimCardEntity(simCard));
+        
+        if (result != null) {
+            log.info("success: {}", result.getSuccess());
+        
+            simCard.setActivated(result.getSuccess());
+            simCardRepository.save(new SimCardEntity(simCard));
+        }
 
         return result;
+
     }
 
     @GetMapping("/getSimCard")
